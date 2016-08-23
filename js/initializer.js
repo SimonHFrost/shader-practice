@@ -48,12 +48,13 @@ function initialize () {
   var camera = createCamera(renderer);
 
   renderLoop.push(function () {
-    renderer.render(scene, camera);
+    composer.render(scene, camera);
   })
 
   return {
     scene: scene,
-    renderer: renderer
+    renderer: renderer,
+    camera: camera
   }
 }
 

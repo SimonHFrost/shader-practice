@@ -6,6 +6,7 @@ var createDirectionalLight = require('./object-creator.js').createDirectionalLig
 var result = initialize();
 var scene = result.scene;
 var renderer = result.renderer;
+var camera = result.camera;
 
 scene.add(createLight());
 scene.add(createDirectionalLight());
@@ -18,3 +19,16 @@ function rotateCube() {
 }
 
 window.setInterval(rotateCube, 20);
+
+// FIXME Global var...
+composer = new THREE.EffectComposer( renderer );
+composer.addPass( new THREE.RenderPass( scene, camera ) );
+
+var dotScreenEffect = new THREE.ShaderPass( THREE.DotScreenShader );
+dotScreenEffect.uniforms[ 'scale' ].value = 4;
+composer.addPass( dotScreenEffect );
+
+var rgbEffect = new THREE.ShaderPass( THREE.RGBShiftShader );
+rgbEffect.uniforms[ 'amount' ].value = 0.0015;
+rgbEffect.renderToScreen = true;
+composer.addPass( rgbEffect );
