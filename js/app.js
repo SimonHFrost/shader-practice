@@ -3,7 +3,10 @@ var createCube = require('./object-creator.js').createCube;
 var createLight = require('./object-creator.js').createLight;
 var createDirectionalLight = require('./object-creator.js').createDirectionalLight;
 
-var scene = initialize();
+var result = initialize();
+var scene = result.scene;
+var renderer = result.renderer;
+
 scene.add(createLight());
 scene.add(createDirectionalLight());
 

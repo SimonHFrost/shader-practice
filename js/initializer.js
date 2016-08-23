@@ -51,7 +51,10 @@ function initialize () {
     renderer.render(scene, camera);
   })
 
-  return scene;
+  return {
+    scene: scene,
+    renderer: renderer
+  }
 }
 
 module.exports = {
