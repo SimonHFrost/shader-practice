@@ -25,8 +25,17 @@ composer = new THREE.EffectComposer( renderer );
 composer.addPass( new THREE.RenderPass( scene, camera ) );
 
 var dotScreenEffect = new THREE.ShaderPass( THREE.DotScreenShader );
-dotScreenEffect.uniforms[ 'scale' ].value = 4;
 composer.addPass( dotScreenEffect );
+
+var angle = 0;
+var scale = 0;
+setInterval(function() {
+  angle = (0.5 + (angle + 0.1)) % 10;
+  scale = (4 + (scale + 0.005)) % 8;
+  dotScreenEffect.uniforms[ 'angle' ].value = angle;
+  dotScreenEffect.uniforms[ 'scale' ].value = scale;
+}, 50);
+
 
 var rgbEffect = new THREE.ShaderPass( THREE.RGBShiftShader );
 rgbEffect.uniforms[ 'amount' ].value = 0.0015;
